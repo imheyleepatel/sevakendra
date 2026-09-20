@@ -2,7 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState, type MouseEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
 
 const links = [
   { href: "#home", label: "Home" },
@@ -43,6 +50,28 @@ function Logo({ onNavigate }: { onNavigate: (event: MouseEvent<HTMLAnchorElement
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#home");
+  const [navbarHeight, setNavbarHeight] = useState(0);
+  const navbarRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const navbar = navbarRef.current;
+    if (!navbar) return;
+
+    const updateNavbarHeight = () => {
+      const height = navbar.getBoundingClientRect().height;
+      setNavbarHeight(height);
+      document.documentElement.style.setProperty("--navbar-height", `${height}px`);
+    };
+
+    updateNavbarHeight();
+    const observer = new ResizeObserver(updateNavbarHeight);
+    observer.observe(navbar);
+
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--navbar-height");
+    };
+  }, []);
 
   useEffect(() => {
     const ids = links.map((link) => link.href.slice(1));
@@ -52,7 +81,8 @@ export default function Navbar() {
 
     if (!elements.length) return;
 
-    const ratios = new Map<string, number>();
+    const visibleIds = new Set<string>();
+    const effectiveNavbarHeight = navbarHeight || 80;
 
     const updateActive = () => {
       const nearTop = window.scrollY < 48;
@@ -70,29 +100,34 @@ export default function Navbar() {
         return;
       }
 
-      let bestId = "home";
-      let bestRatio = 0;
-      for (const [id, ratio] of ratios) {
-        if (ratio > bestRatio) {
-          bestRatio = ratio;
-          bestId = id;
-        }
+      const activeId = ids.filter((id) => visibleIds.has(id)).pop();
+      if (activeId) {
+        setActiveHref(`#${activeId}`);
+        return;
       }
 
-      setActiveHref(`#${bestId}`);
+      const passedIds = elements.filter(
+        (element) => element.getBoundingClientRect().top <= effectiveNavbarHeight,
+      );
+      const lastPassedId = passedIds[passedIds.length - 1]?.id;
+      setActiveHref(`#${lastPassedId || "home"}`);
     };
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+          if (entry.isIntersecting) {
+            visibleIds.add(entry.target.id);
+          } else {
+            visibleIds.delete(entry.target.id);
+          }
         }
         updateActive();
       },
       {
         root: null,
-        rootMargin: "-22% 0px -58% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+        rootMargin: `-${effectiveNavbarHeight}px 0px -55% 0px`,
+        threshold: 0,
       },
     );
 
@@ -104,7 +139,7 @@ export default function Navbar() {
       observer.disconnect();
       window.removeEventListener("scroll", updateActive);
     };
-  }, []);
+  }, [navbarHeight]);
 
   const handleNavClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -115,14 +150,16 @@ export default function Navbar() {
       event.preventDefault();
       setOpen(false);
       setActiveHref(href);
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
       window.history.replaceState(null, "", href);
     },
     [],
   );
 
   return (
-    <header className="sticky top-0 z-[100] w-full max-w-[100vw] border-b border-[#07154F]/10 bg-[#FCFBF8]/95 shadow-[0_4px_18px_rgba(7,21,79,0.06)] backdrop-blur-md">
+    <header ref={navbarRef} className="fixed top-0 right-0 left-0 z-[1000] w-full border-b border-[#07154F]/10 bg-[#FCFBF8]/95 shadow-[0_4px_18px_rgba(7,21,79,0.06)] backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Logo onNavigate={handleNavClick} />
 

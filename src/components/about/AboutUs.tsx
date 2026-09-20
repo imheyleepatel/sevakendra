@@ -197,7 +197,7 @@ export default function AboutUs({
     <section
       id="about-us"
       aria-labelledby="about-heading"
-      className="scroll-mt-24 bg-white"
+      className="nav-anchor bg-white"
     >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         {showIntro ? <>
@@ -267,7 +267,7 @@ export default function AboutUs({
             INSURANCE SOLUTIONS
         ========================== */}
 
-        <div id="our-work" className="mt-20 scroll-mt-24 lg:mt-24">
+        <div id="our-work" className="nav-anchor mt-20 lg:mt-24">
           <Reveal>
             <div className="mx-auto max-w-2xl text-center">
               <span

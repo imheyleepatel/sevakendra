@@ -49,7 +49,7 @@ export default function Reviews() {
     <section
       id="reviews"
       aria-labelledby="reviews-heading"
-      className="scroll-mt-24 bg-white"
+      className="nav-anchor bg-white"
     >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <Reveal>

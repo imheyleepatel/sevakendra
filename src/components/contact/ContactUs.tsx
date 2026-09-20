@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Reveal from "@/components/about/Reveal";
-import GlobalOfficeMap from "./GlobalOfficeMap";
+// import GlobalOfficeMap from "./GlobalOfficeMap";
 import {
   offices,
   serviceOptions,
@@ -48,6 +48,56 @@ const socialLinks = [
       </svg>
     ),
   },
+  {
+    name: "YouTube",
+    href: "#",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden>
+        <path
+          d="M20.2 7.2a2.5 2.5 0 0 0-1.8-1.8C16.8 5 12 5 12 5s-4.8 0-6.4.4a2.5 2.5 0 0 0-1.8 1.8A26 26 0 0 0 3.4 12c0 1.7.1 3.3.4 4.8a2.5 2.5 0 0 0 1.8 1.8C7.2 19 12 19 12 19s4.8 0 6.4-.4a2.5 2.5 0 0 0 1.8-1.8c.3-1.5.4-3.1.4-4.8s-.1-3.3-.4-4.8Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        <path d="m10 9 5 3-5 3V9Z" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    name: "Google",
+    href: "#",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden>
+        <path
+          d="M21 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.1a4.4 4.4 0 0 1-1.9 2.9v2.4h3.1c1.8-1.7 2.7-4.1 2.7-7.1Z"
+          fill="currentColor"
+        />
+        <path
+          d="M12 21c2.6 0 4.8-.9 6.3-2.5l-3.1-2.4c-.9.6-1.9 1-3.2 1-2.5 0-4.6-1.7-5.3-4H3.5v2.5A9.5 9.5 0 0 0 12 21Z"
+          fill="currentColor"
+          opacity=".72"
+        />
+        <path
+          d="M6.7 13.1a5.7 5.7 0 0 1 0-2.2V8.4H3.5a9.5 9.5 0 0 0 0 7.2l3.2-2.5Z"
+          fill="currentColor"
+          opacity=".52"
+        />
+        <path
+          d="M12 6.9c1.4 0 2.6.5 3.6 1.4l2.7-2.7C16.8 4 14.6 3 12 3a9.5 9.5 0 0 0-8.5 5.4l3.2 2.5c.7-2.3 2.8-4 5.3-4Z"
+          fill="currentColor"
+          opacity=".9"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "LinkedIn",
+    href: "#",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
+        <path d="M5.2 8.1A1.8 1.8 0 1 0 5.2 4.5a1.8 1.8 0 0 0 0 3.6ZM3.6 9.6h3.2v10.1H3.6V9.6ZM8.9 9.6H12v1.4h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.2 3.9 5.1v5.3h-3.2v-4.7c0-1.1 0-2.6-1.6-2.6s-1.8 1.2-1.8 2.5v4.8H8.9V9.6Z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function ContactUs() {
@@ -63,7 +113,7 @@ export default function ContactUs() {
     <section
       id="contact-us"
       aria-labelledby="contact-heading"
-      className="scroll-mt-24 bg-[#F5F6FA]"
+      className="nav-anchor bg-[#F5F6FA]"
     >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <Reveal>
@@ -87,6 +137,7 @@ export default function ContactUs() {
           </div>
         </Reveal>
 
+        {/*
         <Reveal delay={100}>
           <div className="mt-12 lg:mt-14">
             <GlobalOfficeMap
@@ -96,6 +147,7 @@ export default function ContactUs() {
             />
           </div>
         </Reveal>
+        */}
 
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
           {offices.map((office, index) => {
