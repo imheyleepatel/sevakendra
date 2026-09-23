@@ -42,19 +42,20 @@ export const offices: Office[] = [
     id: "india",
     country: "India",
     flag: "🇮🇳",
-    officeName: "India Office",
-    address: "[India office address]",
-    phone: "[India phone number]",
-    email: "[India email]",
-    directionsUrl: "#",
+    officeName: "Kalol Office",
+    address:
+      "F-11, JP Commercial Centre,\nMahendra Mill Road,\nUnder old LIC office,\nKalol - 382721",
+    phone: "+91 98765 43210",
+    email: "sevakendrakalol@gmail.com",
+    directionsUrl: "https://maps.app.goo.gl/USWBGmfvNSEJie2z5",
     mapX: 71.8,
     mapY: 40,
   },
 ];
 
 export const contactChannels = {
-  phone: "[Main contact phone number]",
-  email: "[Main contact email]",
+  phone: "+91 98765 43210",
+  email: "sevakendrakalol@gmail.com",
 };
 
 export const serviceOptions = [

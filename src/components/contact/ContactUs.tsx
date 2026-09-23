@@ -12,7 +12,7 @@ import {
 const socialLinks = [
   {
     name: "WhatsApp",
-    href: "#",
+    href: "https://wa.me/15878787087",
     icon: (
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden>
         <path
@@ -30,7 +30,7 @@ const socialLinks = [
   },
   {
     name: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/share/1AXaUw2Qa4/?mibextid=wwXIfr",
     icon: (
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
         <path d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V4a22 22 0 0 0-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3V10H7.5v3h2.7v8h3.4Z" />
@@ -39,7 +39,7 @@ const socialLinks = [
   },
   {
     name: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/seva_kendra?stkn=MXE5Mnp3ZzRoa2k0cg%3D%3D&utm_source=qr",
     icon: (
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden>
         <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.7" />
@@ -50,7 +50,7 @@ const socialLinks = [
   },
   {
     name: "YouTube",
-    href: "#",
+    href: "https://youtube.com/@seva_kendra_gfs?si=9fH6VKEf7bzewer5",
     icon: (
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden>
         <path
@@ -64,7 +64,7 @@ const socialLinks = [
   },
   {
     name: "Google",
-    href: "#",
+    href: "https://share.google/BOVLEh6a1degHqrUk",
     icon: (
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden>
         <path
@@ -91,7 +91,7 @@ const socialLinks = [
   },
   {
     name: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/in/sujal-patel-178204382?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     icon: (
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>
         <path d="M5.2 8.1A1.8 1.8 0 1 0 5.2 4.5a1.8 1.8 0 0 0 0 3.6ZM3.6 9.6h3.2v10.1H3.6V9.6ZM8.9 9.6H12v1.4h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.2 3.9 5.1v5.3h-3.2v-4.7c0-1.1 0-2.6-1.6-2.6s-1.8 1.2-1.8 2.5v4.8H8.9V9.6Z" />
@@ -103,10 +103,46 @@ const socialLinks = [
 export default function ContactUs() {
   const [activeOffice, setActiveOffice] = useState<OfficeId | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      const formData = new FormData(event.currentTarget);
+      const payload = Object.fromEntries(formData.entries());
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to send inquiry right now.");
+      }
+
+      const form = event.currentTarget;
+      if (form && typeof form.reset === "function") {
+        form.reset();
+      }
+      setSubmitted(true);
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to send inquiry right now."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -130,7 +166,7 @@ export default function ContactUs() {
               We&apos;re Here to Help, Wherever You Are.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-[#00022E]/70 sm:text-[0.95rem]">
-              Connect with our team across Canada, USA and India. Our team is
+              Connect with our team across Canada, USA and India. Our Founder is
               here to answer your questions and help you find the right insurance
               solutions.
             </p>
@@ -204,6 +240,8 @@ export default function ContactUs() {
 
                   <a
                     href={office.directionsUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     className="mt-7 inline-flex items-center text-sm font-medium text-[#00022E] transition-colors group-hover:text-[#DAB875]"
                   >
                     Get Directions
@@ -229,7 +267,7 @@ export default function ContactUs() {
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-[#00022E]/70 sm:text-[0.95rem]">
                 Whether you&apos;re looking for insurance protection, exploring
-                your options, or simply need guidance, our team is ready to help.
+                your options, or simply need guidance, our founder is ready to help.
               </p>
 
               <div className="mt-8 grid grid-cols-3 gap-3">
@@ -237,6 +275,8 @@ export default function ContactUs() {
                   <a
                     key={social.name}
                     href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
                     aria-label={social.name}
                     title={social.name}
                     className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-md border border-[#00022E]/8 bg-white px-3 py-4 text-[#00022E] transition-all duration-300 hover:-translate-y-1 hover:border-[#DAB875]/50 hover:text-[#DAB875] hover:shadow-[0_10px_24px_rgba(0,2,46,0.08)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
@@ -259,10 +299,16 @@ export default function ContactUs() {
 
               {submitted ? (
                 <p className="mt-6 text-sm leading-relaxed text-[#00022E]/75">
-                  Thank you for your inquiry. Our team will be in touch shortly.
+                  Thank you for your inquiry. Our founder will be in touch shortly.
                 </p>
               ) : (
                 <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+                  {errorMessage ? (
+                    <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                      {errorMessage}
+                    </p>
+                  ) : null}
+
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
                       <span className="mb-1.5 block text-xs font-medium tracking-wide text-[#00022E]/70 uppercase">
@@ -344,9 +390,10 @@ export default function ContactUs() {
 
                   <button
                     type="submit"
-                    className="inline-flex items-center rounded-full bg-[#00022E] px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:bg-[#DAB875] hover:text-[#00022E] focus-visible:ring-2 focus-visible:ring-[#DAB875] focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none"
+                    disabled={submitting}
+                    className="inline-flex items-center rounded-full bg-[#00022E] px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:bg-[#DAB875] hover:text-[#00022E] focus-visible:ring-2 focus-visible:ring-[#DAB875] focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-70 motion-reduce:transition-none"
                   >
-                    Send Inquiry
+                    {submitting ? "Sending..." : "Send Inquiry"}
                   </button>
                 </form>
               )}

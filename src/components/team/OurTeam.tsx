@@ -26,7 +26,7 @@ export default function OurTeam() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="flex items-center justify-center gap-3 text-[0.68rem] font-medium uppercase tracking-[0.22em] text-[#DAB875]">
               <span className="h-px w-10 bg-[#DAB875]" aria-hidden />
-              Our Team
+              About Founder
               <span className="h-px w-10 bg-[#DAB875]" aria-hidden />
             </p>
             <h2
