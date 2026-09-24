@@ -134,7 +134,15 @@ const services = [
   },
 ];
 
-const partners = [
+type Partner = {
+  name: string;
+  shortName: string;
+  image: string;
+  imageClass: string;
+  wellClass: string;
+};
+
+const partners: Partner[] = [
   {
     name: "Life Insurance Corporation (LIC)",
     shortName: "LIC",
@@ -157,6 +165,77 @@ const partners = [
     wellClass: "bg-[#FCFBF8]",
   },
 ];
+
+const otherPartners: Partner[] = [
+  {
+    name: "Tata AIG Life Insurance",
+    shortName: "Tata AIG",
+    image: "/TataAGI.png",
+    imageClass: "max-h-[3.4rem] w-auto max-w-[7.5rem] sm:max-h-[3.6rem]",
+    wellClass: "bg-white",
+  },
+  {
+    name: "Go Digit General Insurance",
+    shortName: "Go Digit",
+    image: "/digit.png",
+    imageClass: "max-h-[3.2rem] w-auto max-w-[9.5rem] sm:max-h-[3.45rem]",
+    wellClass: "bg-white",
+  },
+  {
+    name: "ICICI Prudential Life Insurance",
+    shortName: "ICICI Prudential",
+    image: "/unnamed.png",
+    imageClass: "max-h-[3.35rem] w-auto max-w-[4.5rem] sm:max-h-[3.6rem]",
+    wellClass: "bg-white",
+  },
+  {
+    name: "Bajaj Allianz Insurance",
+    shortName: "Bajaj Allianz",
+    image: "/bajaj.png",
+    imageClass: "h-[11rem] w-auto max-w-none",
+    wellClass: "overflow-hidden bg-white",
+  },
+  {
+    name: "HDFC Life Insurance",
+    shortName: "HDFC Life",
+    image: "/hdfc.jpg",
+    imageClass: "max-h-[3.15rem] w-auto max-w-[9.5rem] sm:max-h-[3.4rem]",
+    wellClass: "bg-white",
+  },
+];
+
+function PartnerCard({ partner }: { partner: Partner }) {
+  return (
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-md border border-[#00022E]/8 bg-white shadow-[0_4px_24px_rgba(0,2,46,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-[#DAB875]/45 hover:shadow-[0_16px_40px_rgba(0,2,46,0.08)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+      <span
+        className="block h-[3px] w-full bg-gradient-to-r from-[#DAB875]/20 via-[#DAB875] to-[#DAB875]/20 transition-opacity duration-300 group-hover:opacity-100"
+        aria-hidden
+      />
+
+      <div className="flex flex-1 flex-col items-center justify-center px-5 py-7 sm:px-4 sm:py-8">
+        <div
+          className={`flex h-[4.75rem] w-full items-center justify-center rounded-sm px-3 ring-1 ring-[#00022E]/8 transition-all duration-300 group-hover:ring-[#DAB875]/35 ${partner.wellClass}`}
+        >
+          <Image
+            src={partner.image}
+            alt={partner.name}
+            width={280}
+            height={112}
+            sizes="(max-width: 640px) 90vw, 200px"
+            className={`object-contain object-center ${partner.imageClass}`}
+          />
+        </div>
+
+        <p className="mt-5 text-center font-display text-[0.95rem] font-medium leading-snug text-[#00022E]">
+          {partner.shortName}
+        </p>
+        <p className="mt-1 text-center text-[0.72rem] leading-relaxed tracking-wide text-[#00022E]/50">
+          {partner.name}
+        </p>
+      </div>
+    </article>
+  );
+}
 
 function AboutVisual() {
   return (
@@ -187,16 +266,23 @@ function AboutVisual() {
 type AboutUsProps = {
   showIntro?: boolean;
   showWorkSections?: boolean;
+  introHeadingAs?: "h1" | "h2";
+  workHeadingAs?: "h1" | "h2" | "h3";
 };
 
 export default function AboutUs({
   showIntro = true,
   showWorkSections = false,
+  introHeadingAs = "h2",
+  workHeadingAs = "h3",
 }: AboutUsProps) {
+  const IntroHeading = introHeadingAs;
+  const WorkHeading = workHeadingAs;
+
   return (
     <section
       id="about-us"
-      aria-labelledby="about-heading"
+      aria-labelledby={showIntro ? "about-heading" : "work-heading"}
       className="nav-anchor bg-white"
     >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
@@ -220,12 +306,12 @@ export default function AboutUs({
               </p>
 
               {/* Heading */}
-              <h2
+              <IntroHeading
                 id="about-heading"
                 className="mt-5 font-display text-[1.85rem] font-medium leading-[1.18] tracking-[-0.02em] text-[#00022E] sm:text-[2.15rem] lg:text-[2.45rem]"
               >
                 Global Financial Solutions, Built Around Your Needs.
-              </h2>
+              </IntroHeading>
 
               {/* Subheading */}
               <p className="mt-3 font-display text-[1.05rem] italic text-[#DAB875] sm:text-[1.15rem]">
@@ -275,9 +361,12 @@ export default function AboutUs({
                 aria-hidden
               />
 
-              <h3 className="mt-5 font-display text-[1.65rem] font-medium text-[#00022E] sm:text-[1.85rem]">
+              <WorkHeading
+                id="work-heading"
+                className="mt-5 font-display text-[1.65rem] font-medium text-[#00022E] sm:text-[1.85rem]"
+              >
                 Our Insurance Solutions
-              </h3>
+              </WorkHeading>
 
               <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#00022E]/60">
                 Thoughtfully designed insurance solutions to help protect
@@ -353,36 +442,21 @@ export default function AboutUs({
             <div className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
               {partners.map((partner, index) => (
                 <Reveal key={partner.name} delay={100 + index * 90}>
-                  <article
-                    className="group relative flex h-full flex-col overflow-hidden rounded-md border border-[#00022E]/8 bg-white shadow-[0_4px_24px_rgba(0,2,46,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-[#DAB875]/45 hover:shadow-[0_16px_40px_rgba(0,2,46,0.08)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-                  >
-                    <span
-                      className="block h-[3px] w-full bg-gradient-to-r from-[#DAB875]/20 via-[#DAB875] to-[#DAB875]/20 transition-opacity duration-300 group-hover:opacity-100"
-                      aria-hidden
-                    />
+                  <PartnerCard partner={partner} />
+                </Reveal>
+              ))}
+            </div>
 
-                    <div className="flex flex-1 flex-col items-center justify-center px-6 py-8 sm:px-5 sm:py-9">
-                      <div
-                        className={`flex h-[4.75rem] w-full items-center justify-center rounded-sm px-4 ring-1 ring-[#00022E]/8 transition-all duration-300 group-hover:ring-[#DAB875]/35 ${partner.wellClass}`}
-                      >
-                        <Image
-                          src={partner.image}
-                          alt={partner.name}
-                          width={280}
-                          height={112}
-                          sizes="(max-width: 640px) 90vw, 200px"
-                          className={`object-contain object-center ${partner.imageClass}`}
-                        />
-                      </div>
+            <Reveal delay={280}>
+              <p className="mx-auto mt-12 text-center text-[0.68rem] font-medium uppercase tracking-[0.2em] text-[#DAB875]">
+                Other Partners
+              </p>
+            </Reveal>
 
-                      <p className="mt-5 text-center font-display text-[0.95rem] font-medium leading-snug text-[#00022E]">
-                        {partner.shortName}
-                      </p>
-                      <p className="mt-1 text-center text-[0.72rem] leading-relaxed tracking-wide text-[#00022E]/50">
-                        {partner.name}
-                      </p>
-                    </div>
-                  </article>
+            <div className="mx-auto mt-6 grid max-w-6xl grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-5 lg:gap-4">
+              {otherPartners.map((partner, index) => (
+                <Reveal key={partner.name} delay={120 + index * 70}>
+                  <PartnerCard partner={partner} />
                 </Reveal>
               ))}
             </div>

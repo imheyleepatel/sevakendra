@@ -100,7 +100,11 @@ const socialLinks = [
   },
 ];
 
-export default function ContactUs() {
+export default function ContactUs({
+  headingAs = "h2",
+}: {
+  headingAs?: "h1" | "h2";
+}) {
   const [activeOffice, setActiveOffice] = useState<OfficeId | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -145,6 +149,8 @@ export default function ContactUs() {
     }
   }
 
+  const Heading = headingAs;
+
   return (
     <section
       id="contact-us"
@@ -159,12 +165,12 @@ export default function ContactUs() {
               Contact Us
               <span className="h-px w-10 bg-[#DAB875]" aria-hidden />
             </p>
-            <h2
+            <Heading
               id="contact-heading"
               className="mt-5 font-display text-[1.85rem] font-medium leading-[1.16] tracking-[-0.02em] text-[#00022E] sm:text-[2.1rem] lg:text-[2.35rem]"
             >
               We&apos;re Here to Help, Wherever You Are.
-            </h2>
+            </Heading>
             <p className="mt-4 text-sm leading-relaxed text-[#00022E]/70 sm:text-[0.95rem]">
               Connect with our team across Canada, USA and India. Our Founder is
               here to answer your questions and help you find the right insurance

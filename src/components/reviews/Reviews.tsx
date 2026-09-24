@@ -44,7 +44,12 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-export default function Reviews() {
+export default function Reviews({
+  headingAs = "h2",
+}: {
+  headingAs?: "h1" | "h2";
+}) {
+  const Heading = headingAs;
   return (
     <section
       id="reviews"
@@ -59,12 +64,12 @@ export default function Reviews() {
               Client Reviews
               <span className="h-px w-10 bg-[#DAB875]" aria-hidden />
             </p>
-            <h2
+            <Heading
               id="reviews-heading"
               className="mt-5 font-display text-[1.75rem] font-medium leading-[1.18] tracking-[-0.02em] text-[#00022E] sm:text-[2rem] lg:text-[2.25rem]"
             >
               Trusted by Clients Across the Globe
-            </h2>
+            </Heading>
             <p className="mt-4 text-sm leading-relaxed text-[#00022E]/65 sm:text-[0.95rem]">
               Real feedback from clients who value dependable service, expert
               guidance, and long-term financial protection.

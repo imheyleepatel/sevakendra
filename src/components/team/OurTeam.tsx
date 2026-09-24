@@ -2,7 +2,7 @@ import Image from "next/image";
 import Reveal from "@/components/about/Reveal";
 
 const leader = {
-  name: "Damon Salavtor",
+  name: "Sujal Patel",
   role: "Founder & Insurance Advisor",
   image: "/team-1.jpg",
 };
@@ -14,7 +14,12 @@ const highlights = [
   "Building Long-Term Client Relationships",
 ];
 
-export default function OurTeam() {
+export default function OurTeam({
+  headingAs = "h2",
+}: {
+  headingAs?: "h1" | "h2";
+}) {
+  const Heading = headingAs;
   return (
     <section
       id="our-team"
@@ -29,12 +34,12 @@ export default function OurTeam() {
               About Founder
               <span className="h-px w-10 bg-[#DAB875]" aria-hidden />
             </p>
-            <h2
+            <Heading
               id="team-heading"
               className="mt-5 font-display text-[1.75rem] font-medium leading-[1.18] tracking-[-0.02em] text-[#00022E] sm:text-[2rem] lg:text-[2.25rem]"
             >
               Leadership You Can Trust
-            </h2>
+            </Heading>
             <p className="mt-4 text-sm leading-relaxed text-[#00022E]/65 sm:text-[0.95rem]">
               Experienced professionals guiding Seva Kendra with integrity,
               clarity, and a long-term commitment to client success.
@@ -72,12 +77,10 @@ export default function OurTeam() {
                   Profile
                 </p>
                 <p className="mt-4 text-sm leading-8 text-[#00022E]/70 sm:text-[0.95rem]">
-                  With experience in insurance and financial services, Damon
-                  Salavtor is committed to helping individuals and families
-                  choose suitable protection for their future. Through Seva
-                  Kendra, he provides personalized guidance, reliable
-                  solutions, and long-term support while building a trusted
-                  presence across India, Canada, and the USA.
+                  For Sujal Patel, Seva Kendra is more than a business — it is a commitment to people and their future.
+                  Built on experience in insurance and financial services, Seva Kendra was founded with the belief that everyone deserves clear guidance, dependable protection, and someone they can trust when making important financial decisions.
+
+Today, Sujal continues to build that vision by creating lasting relationships and helping individuals and families plan with greater confidence across India, Canada, and the USA.
                 </p>
               </div>
 

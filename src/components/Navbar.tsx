@@ -17,6 +17,7 @@ const links = [
   { href: "#our-work", label: "Our Work" },
   { href: "#our-team", label: "About Founder" },
   { href: "#reviews", label: "Reviews" },
+  { href: "#why-us", label: "Why Us" },
   { href: "#contact-us", label: "Contact Us" },
 ];
 
@@ -52,20 +53,26 @@ export default function Navbar() {
   const [activeHref, setActiveHref] = useState("#home");
   const [navbarHeight, setNavbarHeight] = useState(0);
   const navbarRef = useRef<HTMLElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const pendingScroll = useRef<string | null>(null);
 
   useLayoutEffect(() => {
-    const navbar = navbarRef.current;
-    if (!navbar) return;
+    const bar = barRef.current;
+    if (!bar) return;
 
     const updateNavbarHeight = () => {
-      const height = navbar.getBoundingClientRect().height;
+      // Bar only, plus the header border. The open mobile menu must not inflate this.
+      const border = navbarRef.current
+        ? parseFloat(getComputedStyle(navbarRef.current).borderBottomWidth) || 0
+        : 0;
+      const height = Math.ceil(bar.getBoundingClientRect().height + border);
       setNavbarHeight(height);
       document.documentElement.style.setProperty("--navbar-height", `${height}px`);
     };
 
     updateNavbarHeight();
     const observer = new ResizeObserver(updateNavbarHeight);
-    observer.observe(navbar);
+    observer.observe(bar);
 
     return () => {
       observer.disconnect();
@@ -141,6 +148,19 @@ export default function Navbar() {
     };
   }, [navbarHeight]);
 
+  const scrollToSection = useCallback((href: string) => {
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  useEffect(() => {
+    if (open || !pendingScroll.current) return;
+    const href = pendingScroll.current;
+    pendingScroll.current = null;
+    scrollToSection(href);
+  }, [open, scrollToSection]);
+
   const handleNavClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>, href: string) => {
       const id = href.slice(1);
@@ -148,19 +168,23 @@ export default function Navbar() {
       if (!target) return;
 
       event.preventDefault();
-      setOpen(false);
       setActiveHref(href);
-      requestAnimationFrame(() => {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
       window.history.replaceState(null, "", href);
+
+      if (open) {
+        pendingScroll.current = href;
+        setOpen(false);
+        return;
+      }
+
+      scrollToSection(href);
     },
-    [],
+    [open, scrollToSection],
   );
 
   return (
     <header ref={navbarRef} className="fixed top-0 right-0 left-0 z-[1000] w-full border-b border-[#07154F]/10 bg-[#FCFBF8]/95 shadow-[0_4px_18px_rgba(7,21,79,0.06)] backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <div ref={barRef} className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Logo onNavigate={handleNavClick} />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">

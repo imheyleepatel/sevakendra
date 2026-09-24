@@ -22,7 +22,8 @@
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
-  scroll-padding-top: 6.25rem;
+  /* Offset lives on the anchors. Setting both padding and margin stacks them. */
+  scroll-padding-top: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
