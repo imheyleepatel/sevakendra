@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     "general insurance",
     "Calgary insurance",
     "Kalol insurance",
+    "Ahmedabad insurance",
     "Canada India USA insurance",
   ],
   openGraph: {

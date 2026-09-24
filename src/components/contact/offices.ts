@@ -32,10 +32,11 @@ export const offices: Office[] = [
     country: "USA",
     flag: "🇺🇸",
     officeName: "USA Office",
-    address: "[USA office address]",
-    phone: "[USA phone number]",
+    address:
+      "2211 Portlock Road,\nChesapeake, VA 23324",
+    phone: "+1 587 878 7087",
     email: "[USA email]",
-    directionsUrl: "#",
+    directionsUrl: "https://maps.google.com/?q=2211+Portlock+Road+Chesapeake+VA+23324",
     mapX: 22.5,
     mapY: 31.5,
   },
@@ -55,7 +56,7 @@ export const offices: Office[] = [
 ];
 
 export const contactChannels = {
-  phone: "+91 98765 43210",
+  phone: "+91 98987 77837",
   email: "sevakendrakalol@gmail.com",
 };
 
