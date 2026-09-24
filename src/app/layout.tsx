@@ -66,10 +66,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: [{ url: "/logo-mark.png", type: "image/png" }],
-    apple: "/logo-mark.png",
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
