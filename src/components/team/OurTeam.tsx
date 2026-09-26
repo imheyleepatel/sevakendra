@@ -4,7 +4,7 @@ import Reveal from "@/components/about/Reveal";
 const leader = {
   name: "Sujal Patel",
   role: "Founder & Insurance Advisor",
-  image: "/team-1.jpg",
+  image: "/founder.png",
 };
 
 const highlights = [
