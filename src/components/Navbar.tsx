@@ -15,9 +15,10 @@ const links = [
   { href: "#home", label: "Home" },
   { href: "#about-us", label: "About Us" },
   { href: "#our-work", label: "Our Work" },
-  { href: "#our-team", label: "About Founder" },
+  { href: "#about-founder", label: "About Founder" },
+  { href: "#our-team", label: "Our Team" },
   { href: "#reviews", label: "Reviews" },
-  { href: "#why-us", label: "Why Us" },
+  { href: "#faq", label: "FAQ" },
   { href: "#contact-us", label: "Contact Us" },
 ];
 

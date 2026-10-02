@@ -41,3 +41,100 @@ body {
 .nav-anchor {
   scroll-margin-top: var(--navbar-height, 5rem);
 }
+
+@keyframes team-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes team-shine {
+  0% {
+    transform: translateX(-160%);
+  }
+  55%,
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+.team-glow {
+  animation: team-glow 2.4s ease-in-out infinite;
+}
+
+.team-shine {
+  animation: team-shine 2.8s ease-in-out infinite;
+}
+
+@keyframes team-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes team-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.team-backdrop-in {
+  animation: team-backdrop-in 0.35s ease-out both;
+}
+
+.team-dialog-in {
+  animation: team-dialog-in 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes team-backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes team-dialog-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+}
+
+.team-backdrop-out {
+  animation: team-backdrop-out 0.28s ease-in both;
+}
+
+.team-dialog-out {
+  animation: team-dialog-out 0.32s ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-glow,
+  .team-shine,
+  .team-backdrop-in,
+  .team-dialog-in,
+  .team-backdrop-out,
+  .team-dialog-out {
+    animation: none;
+  }
+}

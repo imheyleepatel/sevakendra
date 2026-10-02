@@ -22,7 +22,7 @@ export const offices: Office[] = [
     address:
       "3740 11a st NE unit 201F,\nCalgary, Alberta T2E 6M9,\nCanada",
     phone: "+1 587 878 7087",
-    email: "sevakendracanada@gmail.com",
+    email: "sujal.sevakendra@gmail.com",
     directionsUrl: "https://maps.google.com/?q=3740+11a+st+NE+unit+201F+Calgary+Alberta+T2E+6M9+Canada",
     mapX: 20.5,
     mapY: 27,
@@ -35,7 +35,7 @@ export const offices: Office[] = [
     address:
       "2211 Portlock Road,\nChesapeake, VA 23324",
     phone: "+1 587 878 7087",
-    email: "[USA email]",
+    email: "sujal.sevakendra@gmail.com",
     directionsUrl: "https://maps.google.com/?q=2211+Portlock+Road+Chesapeake+VA+23324",
     mapX: 22.5,
     mapY: 31.5,

@@ -12,7 +12,7 @@ export function organizationJsonLd() {
     url,
     logo: `${url}/logo-mark.png`,
     image: `${url}/logo.png`,
-    email: "sevakendracanada@gmail.com",
+    email: "sujal.sevakendra@gmail.com",
     telephone: "+1-587-878-7087",
     foundingDate: "2010",
     areaServed: ["CA", "IN", "US"],
@@ -37,7 +37,7 @@ export function organizationJsonLd() {
         "@type": "InsuranceAgency",
         name: "Seva Kendra Canada Office",
         telephone: "+1-587-878-7087",
-        email: "sevakendracanada@gmail.com",
+        email: "sujal.sevakendra@gmail.com",
         address: {
           "@type": "PostalAddress",
           streetAddress: "3740 11a St NE, Unit 201F",

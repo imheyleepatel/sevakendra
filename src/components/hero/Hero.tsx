@@ -53,7 +53,7 @@ export default function Hero() {
 
           <div className={`${styles.reveal} ${styles.delay3} mt-8`}>
             <Link
-              href="/our-work"
+              href="/#our-work"
               className="group inline-flex items-center rounded-full bg-[#07154F] px-6 py-3 text-sm font-medium tracking-wide text-white shadow-[0_8px_20px_rgba(7,21,79,0.16)] transition-all duration-300 hover:bg-[#D8A63A] hover:text-[#07154F] hover:shadow-[0_10px_24px_rgba(216,166,58,0.28)] focus-visible:ring-2 focus-visible:ring-[#D8A63A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FCFBF8] focus-visible:outline-none motion-reduce:transition-none"
             >
               Explore Our Services

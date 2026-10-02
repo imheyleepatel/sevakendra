@@ -6,8 +6,9 @@ const quickLinks = [
   { label: "Home", href: "#home" },
   { label: "About Us", href: "#about-us" },
   { label: "Our Work / Services", href: "#our-work" },
-  { label: "About Founder", href: "#our-team" },
-  { label: "Why Us", href: "#why-us" },
+  { label: "About Founder", href: "#about-founder" },
+  { label: "Our Team", href: "#our-team" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const insuranceLinks = [

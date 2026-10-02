@@ -26,7 +26,7 @@ export default function ContactUsPage() {
             name: "Seva Kendra",
             url: siteUrl,
             telephone: "+1-587-878-7087",
-            email: "sevakendracanada@gmail.com",
+            email: "sujal.sevakendra@gmail.com",
           },
         }}
       />

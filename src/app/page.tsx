@@ -1,7 +1,7 @@
 import AboutUs from "@/components/about/AboutUs";
 import GlobalPresence from "@/components/GlobalPresence";
 import Hero from "@/components/hero/Hero";
-import OurTeam from "@/components/team/OurTeam";
+import OurTeam, { TeamSection } from "@/components/team/OurTeam";
 import ContactUs from "@/components/contact/ContactUs";
 import Reviews from "@/components/reviews/Reviews";
 import WhyUs from "@/components/why-us/WhyUs";
@@ -27,6 +27,7 @@ export default function Home() {
       <GlobalPresence />
       <AboutUs showWorkSections />
       <OurTeam />
+      <TeamSection />
       <Reviews />
       <WhyUs />
       <ContactUs />

@@ -9,8 +9,8 @@ export default function WhyUs() {
 
   return (
     <section
-      id="why-us"
-      aria-labelledby="why-us-heading"
+      id="faq"
+      aria-labelledby="faq-heading"
       className="nav-anchor bg-[#FCFBF8]"
     >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
@@ -18,14 +18,14 @@ export default function WhyUs() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="flex items-center justify-center gap-3 text-[0.68rem] font-medium uppercase tracking-[0.22em] text-[#DAB875]">
               <span className="h-px w-10 bg-[#DAB875]" aria-hidden />
-              Why Us
+              FAQs
               <span className="h-px w-10 bg-[#DAB875]" aria-hidden />
             </p>
             <h2
-              id="why-us-heading"
+              id="faq-heading"
               className="mt-5 font-display text-[1.75rem] font-medium leading-[1.18] tracking-[-0.02em] text-[#00022E] sm:text-[2rem] lg:text-[2.25rem]"
             >
-              People First, Every Step of the Way
+              Frequently Asked Questions
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-[#00022E]/65 sm:text-[0.95rem]">
               Clear answers about how we work, the services we provide, and how
@@ -37,8 +37,8 @@ export default function WhyUs() {
         <div className="mx-auto mt-12 max-w-3xl divide-y divide-[#00022E]/8 overflow-hidden rounded-md border border-[#00022E]/8 bg-white lg:mt-14">
           {faqs.map((item, index) => {
             const open = openIndex === index;
-            const panelId = `why-us-answer-${index}`;
-            const buttonId = `why-us-question-${index}`;
+            const panelId = `faq-answer-${index}`;
+            const buttonId = `faq-question-${index}`;
 
             return (
               <Reveal key={item.question} delay={70 + index * 60}>
